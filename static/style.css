@@ -1,0 +1,26 @@
+#head-nv{
+    text-align: center;
+    background-blend-mode: 0.4;
+}
+
+#title{
+  color:#2D0C57;
+}
+
+#home-main{
+    font-family: 'Roboto', sans-serif;
+    font-size: 40px;
+}
+
+#profile-img{
+    border-radius: 15%;
+    height: 300px;
+}
+
+#home-contact{
+    font-size:20px;
+}
+
+.navbar{
+    background-color: #0BCE83;
+}
