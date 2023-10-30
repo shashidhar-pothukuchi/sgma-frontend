@@ -32,11 +32,11 @@
                             <input type="search" class="form-control me-2 dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" 
                              placeholder="Search items to add" onkeyup="filterFunction()">
                             <ul class="dropdown-menu container-fluid" id="myUL" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" href="#" onclick="setinputfield('Tomato')"><img src="https://via.placeholder.com/20" class="drow"> Tomato</a></li>
-                                <li><a class="dropdown-item" href="#"><img src="https://via.placeholder.com/20" class="drow"> Onion</a></li>
-                                <li><a class="dropdown-item" href="#"><img src="https://via.placeholder.com/20" class="drow"> Bread</a></li>
-                                <li><a class="dropdown-item" href="#"><img src="https://via.placeholder.com/20" class="drow"> Garlic</a></li>
-                                <li><a class="dropdown-item" href="#"><img src="https://via.placeholder.com/20" class="drow"> Eggs</a></li>
+                                <li><a class="dropdown-item item-search-li" href="#" onclick="setinputfield('Tomato')"><img src="https://via.placeholder.com/20" class="drow"> Tomato</a></li>
+                                <li><a class="dropdown-item item-search-li" href="#" onclick="setinputfield('Onion')"><img src="https://via.placeholder.com/20" class="drow"> Onion</a></li>
+                                <li><a class="dropdown-item item-search-li" href="#" onclick="setinputfield('Bread')"><img src="https://via.placeholder.com/20" class="drow"> Bread</a></li>
+                                <li><a class="dropdown-item item-search-li" href="#" onclick="setinputfield('Garlic')"><img src="https://via.placeholder.com/20" class="drow"> Garlic</a></li>
+                                <li><a class="dropdown-item item-search-li" href="#" onclick="setinputfield('Eggs')"><img src="https://via.placeholder.com/20" class="drow"> Eggs</a></li>
                             </ul>
                         </div>
                     </div>
@@ -65,30 +65,8 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script> -->
     <script src="https://kit.fontawesome.com/306b0b3db1.js" crossorigin="anonymous"></script>
-    
-    <script>
-         function filterFunction() {
-            var input, filter, ul, li, a, i, txtValue;
-            input = document.getElementById('dropdownMenuButton');
-            filter = input.value.toUpperCase();
-            ul = document.getElementById('myUL');
-            li = ul.getElementsByTagName('li');
+    <script src = "./script.js"></script>
 
-            for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName('a')[0];
-                txtValue = a.textContent || a.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = '';
-                } else {
-                    li[i].style.display = 'none';
-                }
-            }
-        }
-
-        function setinputfield(value){
-            document.getElementById('dropdownMenuButton').value = value;
-        }
-    </script>
 </body>
 
 </html>
