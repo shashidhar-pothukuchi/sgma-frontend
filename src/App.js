@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Search from './components/Search';
 import Item from './components/Item';
 import CreateList from './components/Grocerylist';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 
 function App() {
