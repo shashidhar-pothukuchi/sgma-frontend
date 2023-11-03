@@ -15,7 +15,7 @@ function App() {
         <h1 className="pt-4 display1">Inventory</h1>
         <Item />
       </div>
-      <CreateList />
+      <CreateList/>
     </div>
   );
 }
