@@ -4,10 +4,10 @@ import ViewItemDetails from './ViewItemDetails';
 import DeletePopup from './DeletePopup';
 import 'font-awesome/css/font-awesome.min.css';
 
-function Item() {
+function Item(props) {
   const [isDetailsPopupOpen, setDetailsPopupOpen] = useState(true);
   const [isDeletePopupOpen, setDeletePopupOpen] = useState(true);
-
+  const [quanity, setQuanity] = useState(5);
   const handleDetailsClick = () => {
     setDetailsPopupOpen(true);
   };
@@ -55,11 +55,15 @@ function Item() {
               </h3>
               <div className="text-center py-1">
                 <div className="btn-group">
-                  <button type="button" className="btn btn-outline-secondary rounded border-0">
+                  <button type="button" 
+                  className="btn btn-outline-secondary rounded border-0"
+                  onClick={()=> setQuanity(quanity-1)} >
                     <i className="fa fa-minus"></i>
                   </button>
-                  <h1 className="card-text px-4 quantity"> 10 </h1>
-                  <button type="button" className="btn btn-outline-secondary rounded border-0">
+                  <h1 className="card-text px-4 quantity"> {quanity} </h1>
+                  <button type="button" 
+                  className="btn btn-outline-secondary rounded border-0"
+                  onClick={()=> setQuanity(quanity+1)}>
                     <i className="fa fa-add"></i>
                   </button>
                 </div>
