@@ -4,10 +4,10 @@ import ViewItemDetails from './ViewItemDetails';
 import DeletePopup from './DeletePopup';
 import 'font-awesome/css/font-awesome.min.css';
 
-function Item(props) {
+function Item({ details }) {
   const [isDetailsPopupOpen, setDetailsPopupOpen] = useState(true);
   const [isDeletePopupOpen, setDeletePopupOpen] = useState(true);
-  const [quanity, setQuanity] = useState(5);
+  const [quanity, setQuanity] = useState(details.quantity);
   const handleDetailsClick = () => {
     setDetailsPopupOpen(true);
   };
@@ -29,13 +29,13 @@ function Item(props) {
       <div className="card rounded border-0 bg-success-subtle shadow-sm">
         <div className="row g-0">
           <div className="col-md-4 text-center">
-          <img src={require('../images/toamto.jpg')} className="img-fluid rounded p-2" alt="Tomato"/>
+          <img src={details.imgSrc} className="img-fluid rounded p-2" height="100" width="100" alt="Tomato"/>
           <p className="pt-2">Expires in 7 days</p>
           </div>
           <div className="col-md-8">
             <div className="card-body">
               <h3 className="card-title d-flex justify-content-between align-items-center">
-                <span className="mx-auto">Tomato</span>
+                <span className="mx-auto">{details.name}</span>
                 <button
                   type="button"
                   className="btn btn-outline-danger border-0"
