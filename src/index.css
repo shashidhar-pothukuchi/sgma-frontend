@@ -123,3 +123,7 @@ color:#2D0C57;
 .strikethrough {
   text-decoration: line-through;
 }
+
+.dropdown-toggle::after {
+  display: none !important; 
+}
