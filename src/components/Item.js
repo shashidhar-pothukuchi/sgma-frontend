@@ -12,6 +12,8 @@ function Item({
   updatedefInventory,
   updateExpiryDate,
   deleteItem,
+  transactions,
+  recordTransaction,
 }) {
   //const { inventory, updateInventory } = Inventory();
   const [isDetailsPopupOpen, setDetailsPopupOpen] = useState(false);
@@ -34,19 +36,36 @@ function Item({
     setDeletePopupOpen(false);
   };
 
-  const updateNewAdded = (newValue, edate, isDefault) => {
+  const updateNewAdded = async (newValue, edate, isDefault) => {
     if (isDefault) {
-      updatedefInventory(details.id, newValue);
+      const oldValue = details.defquantity;
+      await updatedefInventory(details.id, newValue);
+      recordTransaction({
+        itemid: details.id,
+        quantity: oldValue,
+        updatedQuantity: newValue,
+        type: "Default Quantity",
+        description: "Updated Default Quantity: " + newValue,
+      });
     } else {
+      const oldValue = details.quantity;
+      await updateInventory(details.id, details.quantity + newValue);
       if (edate != null) {
-        updateExpiryDate(details.id, edate);
+        await updateExpiryDate(details.id, edate);
       }
-      updateInventory(details.id, details.quantity + newValue);
+      recordTransaction({
+        itemid: details.id,
+        quantity: oldValue,
+        updatedQuantity: oldValue + newValue,
+        type: "Quantity",
+        description: "Added: " + newValue,
+      });
     }
   };
 
   const deleteitemcard = () => {
     deleteItem(details.id);
+    handleDeletePopupClose();
   };
 
   return (
@@ -87,9 +106,7 @@ function Item({
                   <button
                     type="button"
                     className="btn btn-outline-secondary rounded border-0"
-                    onClick={() =>
-                      updateInventory(details.id, details.quantity - 1)
-                    }
+                    onClick={() => updateNewAdded(-1, null, false)}
                   >
                     <i className="fa fa-minus"></i>
                   </button>
@@ -100,9 +117,7 @@ function Item({
                   <button
                     type="button"
                     className="btn btn-outline-secondary rounded border-0"
-                    onClick={() =>
-                      updateInventory(details.id, details.quantity + 1)
-                    }
+                    onClick={() => updateNewAdded(1, null, false)}
                   >
                     <i className="fa fa-add"></i>
                   </button>
