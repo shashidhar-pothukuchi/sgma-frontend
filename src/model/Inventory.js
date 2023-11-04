@@ -8,7 +8,7 @@ export const Inventory = () => {
       quantity: 10,
       defquantity: 10,
       imgSrc: require("./../images/toamto.jpg"),
-      expiryDate: Date("11-10-2023"),
+      expiryDate: "2023-11-10",
     },
     {
       id: 2,
@@ -16,7 +16,7 @@ export const Inventory = () => {
       quantity: 6,
       defquantity: 10,
       imgSrc: require("./../images/onion.jpeg"),
-      expiryDate: Date("11-15-2023"),
+      expiryDate: "2023-11-15",
     },
     {
       id: 3,
@@ -24,7 +24,7 @@ export const Inventory = () => {
       quantity: 18,
       defquantity: 10,
       imgSrc: require("./../images/egg.png"),
-      expiryDate: Date("11-11-2023"),
+      expiryDate: "2023-11-11",
     },
     {
       id: 4,
@@ -32,7 +32,7 @@ export const Inventory = () => {
       quantity: 10,
       defquantity: 10,
       imgSrc: require("./../images/bread.jpeg"),
-      expiryDate: Date("11-01-2023"),
+      expiryDate: "2023-11-01",
     },
     {
       id: 5,
@@ -40,7 +40,7 @@ export const Inventory = () => {
       quantity: 2,
       defquantity: 10,
       imgSrc: require("./../images/garlic.jpg"),
-      expiryDate: Date("12-12-2023"),
+      expiryDate: "2023-12-12",
     },
     // Add more items as needed
   ]);
@@ -72,7 +72,7 @@ export const Inventory = () => {
   const updateExpiryDate = (id, newExpiryDate) => {
     const updatedInventory = inventory.map((item) => {
       if (item.id === id) {
-        return { ...item, expiryDate: Date(newExpiryDate) };
+        return { ...item, expiryDate: newExpiryDate };
       }
       return item;
     });

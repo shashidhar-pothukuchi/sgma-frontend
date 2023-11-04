@@ -16,7 +16,7 @@ function ViewItemDetails({ isOpen, onClose, details, updateInventory }) {
   const [isChecked, setIsChecked] = useState(false);
   const [selectedRadio, setSelectedRadio] = useState("btnradio1");
   const [addQuantity, setaddQuantity] = useState("");
-  const [edate, setedate] = useState();
+  const [edate, setedate] = useState(" ");
   // const citem = inventory.find((item) => item.id === id);
 
   const handleCheckboxChange = (event) => {
@@ -148,7 +148,9 @@ function ViewItemDetails({ isOpen, onClose, details, updateInventory }) {
                   type="date"
                   id="expiryDate"
                   value={edate}
-                  onChange={(e) => setedate(e.target.value)}
+                  onChange={(e) => {
+                    setedate(e.target.value);
+                  }}
                 />
               </div>
               <div className="form-check mb-4">

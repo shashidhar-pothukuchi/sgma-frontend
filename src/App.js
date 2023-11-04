@@ -34,9 +34,9 @@ function App() {
                 <div className="container-fluid pt-3">
                   <Search addNewItem={addNewItem} />
                   <h1 className="pt-4 display1">Inventory</h1>
-                  {inventory.map((item) => (
+                  {/* {inventory.map((item) => (
                     <p>{item.expiryDate}</p>
-                  ))}
+                  ))} */}
                   <container fluid>
                     <Row>
                       {inventory.map((item) => (

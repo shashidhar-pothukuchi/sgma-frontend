@@ -48,11 +48,11 @@ function Item({
         description: "Updated Default Quantity: " + newValue,
       });
     } else {
-      const oldValue = details.quantity;
-      await updateInventory(details.id, details.quantity + newValue);
       if (edate != null) {
         await updateExpiryDate(details.id, edate);
       }
+      const oldValue = details.quantity;
+      await updateInventory(details.id, details.quantity + newValue);
       recordTransaction({
         itemid: details.id,
         quantity: oldValue,
