@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Search from "./components/Search";
@@ -9,10 +9,16 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Row } from "react-bootstrap";
 import "./index.css";
 import { Inventory } from "./model/Inventory";
-import ViewItemDetails from "./components/ViewItemDetails";
 
 function App() {
-  const { inventory, updateInventory, updatedefInventory } = Inventory();
+  const {
+    inventory,
+    updateInventory,
+    updatedefInventory,
+    updateExpiryDate,
+    addNewItem,
+    deleteItem,
+  } = Inventory();
   return (
     <Router>
       <div className="App">
@@ -23,11 +29,11 @@ function App() {
             element={
               <>
                 <div className="container-fluid pt-3">
-                  <Search />
+                  <Search addNewItem={addNewItem} />
                   <h1 className="pt-4 display1">Inventory</h1>
-                  {inventory.map((item) => (
-                    <p>{item.quantity}</p>
-                  ))}
+                  {/* {inventory.map((item) => (
+                    <p>{item.expiryDate}</p>
+                  ))} */}
                   <container fluid>
                     <Row>
                       {inventory.map((item) => (
@@ -35,6 +41,8 @@ function App() {
                           details={item}
                           updateInventory={updateInventory}
                           updatedefInventory={updatedefInventory}
+                          updateExpiryDate={updateExpiryDate}
+                          deleteItem={deleteItem}
                         />
                       ))}
                     </Row>
@@ -47,10 +55,6 @@ function App() {
           <Route
             path="/createlist"
             element={<Grocerylist items={inventory} />}
-          />
-          <Route
-            path="/viewdetails"
-            element={<ViewItemDetails items={inventory} />}
           />
         </Routes>
       </div>

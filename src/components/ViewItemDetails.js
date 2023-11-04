@@ -161,12 +161,20 @@ function ViewItemDetails({ isOpen, onClose, details, updateInventory }) {
                 />
               </div>
               <div className="text-center">
-                <Button variant="outline-secondary" onClick={onClose}>
+                <Button
+                  variant="outline-secondary"
+                  onClick={() => {
+                    setedate("");
+                    setaddQuantity("");
+                  }}
+                >
                   Cancel
                 </Button>
                 <Button
                   variant="outline-success"
-                  onClick={(e) => updateInventory(addQuantity, isChecked)}
+                  onClick={(e) =>
+                    updateInventory(addQuantity, edate, isChecked)
+                  }
                 >
                   Add
                 </Button>

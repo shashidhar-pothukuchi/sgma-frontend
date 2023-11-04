@@ -6,7 +6,13 @@ import "font-awesome/css/font-awesome.min.css";
 // import { Link } from "react-router-dom";
 // import { Modal } from "react-bootstrap";
 
-function Item({ details, updateInventory, updatedefInventory }) {
+function Item({
+  details,
+  updateInventory,
+  updatedefInventory,
+  updateExpiryDate,
+  deleteItem,
+}) {
   //const { inventory, updateInventory } = Inventory();
   const [isDetailsPopupOpen, setDetailsPopupOpen] = useState(false);
   const [isDeletePopupOpen, setDeletePopupOpen] = useState(false);
@@ -28,12 +34,19 @@ function Item({ details, updateInventory, updatedefInventory }) {
     setDeletePopupOpen(false);
   };
 
-  const updateNewAdded = (newValue, isDefault) => {
+  const updateNewAdded = (newValue, edate, isDefault) => {
     if (isDefault) {
       updatedefInventory(details.id, newValue);
     } else {
+      if (edate != null) {
+        updateExpiryDate(details.id, edate);
+      }
       updateInventory(details.id, details.quantity + newValue);
     }
+  };
+
+  const deleteitemcard = () => {
+    deleteItem(details.id);
   };
 
   return (
@@ -57,8 +70,6 @@ function Item({ details, updateInventory, updatedefInventory }) {
                 <button
                   type="button"
                   className="btn btn-outline-danger border-0"
-                  data-bs-toggle="modal"
-                  data-bs-target="#deleteModal"
                   onClick={handleDeleteClick}
                 >
                   <i className="fa fa-trash"></i>
@@ -67,6 +78,7 @@ function Item({ details, updateInventory, updatedefInventory }) {
                   <DeletePopup
                     isOpen={isDeletePopupOpen}
                     onClose={handleDeletePopupClose}
+                    handleDeleteItem={deleteitemcard}
                   />
                 )}
               </h3>
