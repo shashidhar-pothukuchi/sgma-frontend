@@ -1,13 +1,17 @@
+import React, { useState } from "react";
+import ViewItemDetails from "./ViewItemDetails";
+import DeletePopup from "./DeletePopup";
+import "font-awesome/css/font-awesome.min.css";
+// import { Inventory } from "../model/Inventory";
+// import { Link } from "react-router-dom";
+// import { Modal } from "react-bootstrap";
 
-import React, { useState } from 'react';
-import ViewItemDetails from './ViewItemDetails';
-import DeletePopup from './DeletePopup';
-import 'font-awesome/css/font-awesome.min.css';
-
-function Item({ details }) {
-  const [isDetailsPopupOpen, setDetailsPopupOpen] = useState(true);
-  const [isDeletePopupOpen, setDeletePopupOpen] = useState(true);
-  const [quanity, setQuanity] = useState(details.quantity);
+function Item({ details, updateInventory, updatedefInventory }) {
+  //const { inventory, updateInventory } = Inventory();
+  const [isDetailsPopupOpen, setDetailsPopupOpen] = useState(false);
+  const [isDeletePopupOpen, setDeletePopupOpen] = useState(false);
+  //   const item = inventory.find((item) => item.id === details.id);
+  //const [item, setitem] = useState(inventory.find(item => item.id === details.id));
   const handleDetailsClick = () => {
     setDetailsPopupOpen(true);
   };
@@ -17,11 +21,19 @@ function Item({ details }) {
   };
 
   const handleDetailsPopupClose = () => {
-    setDetailsPopupOpen(true);
+    setDetailsPopupOpen(false);
   };
 
   const handleDeletePopupClose = () => {
-    setDeletePopupOpen(true);
+    setDeletePopupOpen(false);
+  };
+
+  const updateNewAdded = (newValue, isDefault) => {
+    if (isDefault) {
+      updatedefInventory(details.id, newValue);
+    } else {
+      updateInventory(details.id, details.quantity + newValue);
+    }
   };
 
   return (
@@ -29,8 +41,14 @@ function Item({ details }) {
       <div className="card rounded border-0 bg-success-subtle shadow-sm">
         <div className="row g-0">
           <div className="col-md-4 text-center">
-          <img src={details.imgSrc} className="img-fluid rounded p-2" height="100" width="100" alt="Tomato"/>
-          <p className="pt-2">Expires in 7 days</p>
+            <img
+              src={details.imgSrc}
+              className="img-fluid rounded p-2"
+              height="100"
+              width="100"
+              alt="Tomato"
+            />
+            <p className="pt-2">Expires in 7 days</p>
           </div>
           <div className="col-md-8">
             <div className="card-body">
@@ -46,43 +64,60 @@ function Item({ details }) {
                   <i className="fa fa-trash"></i>
                 </button>
                 {isDeletePopupOpen && (
-                    <DeletePopup
-                      isOpen={isDeletePopupOpen}
-                      
-                      onClose={handleDeletePopupClose}
-                    />
-                  )}
+                  <DeletePopup
+                    isOpen={isDeletePopupOpen}
+                    onClose={handleDeletePopupClose}
+                  />
+                )}
               </h3>
               <div className="text-center py-1">
                 <div className="btn-group">
-                  <button type="button" 
-                  className="btn btn-outline-secondary rounded border-0"
-                  onClick={()=> setQuanity(quanity-1)} >
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary rounded border-0"
+                    onClick={() =>
+                      updateInventory(details.id, details.quantity - 1)
+                    }
+                  >
                     <i className="fa fa-minus"></i>
                   </button>
-                  <h1 className="card-text px-4 quantity"> {quanity} </h1>
-                  <button type="button" 
-                  className="btn btn-outline-secondary rounded border-0"
-                  onClick={()=> setQuanity(quanity+1)}>
+                  <h1 className="card-text px-4 quantity">
+                    {" "}
+                    {details.quantity}{" "}
+                  </h1>
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary rounded border-0"
+                    onClick={() =>
+                      updateInventory(details.id, details.quantity + 1)
+                    }
+                  >
                     <i className="fa fa-add"></i>
                   </button>
                 </div>
               </div>
               <div className="container text-center py-1 mb-py-0">
+                {/* <Link to='/viewdetails'> */}
                 <button
                   type="button"
                   className="btn btn-success details-btn"
-                  data-bs-toggle="modal"
-                  data-bs-target="#detailsModal"
-                  onClick={handleDetailsClick}>
+                  //   data-bs-toggle="modal"
+                  //   data-bs-target="#detailsModal"
+                  onClick={handleDetailsClick}
+                >
                   View Details
                 </button>
+                {/* </Link> */}
+                {/* <Modal show={isDetailsPopupOpen} onHide={handleDeletePopupClose} backdrop="static"> */}
                 {isDetailsPopupOpen && (
                   <ViewItemDetails
                     isOpen={isDetailsPopupOpen}
                     onClose={handleDetailsPopupClose}
+                    details={details}
+                    updateInventory={updateNewAdded}
                   />
                 )}
+                {/* </Modal> */}
               </div>
             </div>
           </div>
