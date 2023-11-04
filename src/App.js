@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar';
 import Search from './components/Search';
 import Item from './components/Item';
-import CreateList from './components/Grocerylist';
+import Grocerylist from './components/Grocerylist';
+import CreateListButton from './components/CreateListButton';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Row} from 'react-bootstrap'
 import './index.css'
@@ -18,21 +20,30 @@ function App() {
     // Add more items as needed
   ]);
   return (
+    <Router>
     <div className="App">
       <Navbar />
-      <div className="container-fluid pt-3">
-        <Search />
-        <h1 className="pt-4 display1">Inventory</h1>
-        <container fluid>
-          <Row>
-        {inventory.map((item) => (
-          <Item details = {item} />
-        ))}
-        </Row>
-        </container>
-      </div>
-      <CreateList/>
+      <Routes>
+          <Route path='/' element = {
+            <>
+            <div className="container-fluid pt-3">
+              <Search />
+              <h1 className="pt-4 display1">Inventory</h1>
+              <container fluid>
+                <Row>
+              {inventory.map((item) => (
+                <Item details = {item} />
+              ))}
+              </Row>
+              </container>
+            </div>
+            </>
+          }/>
+      <Route path='/createlist' element = {<Grocerylist/>}/>
+      </Routes>
+      <CreateListButton/>
     </div>
+    </Router>
   );
 }
 
