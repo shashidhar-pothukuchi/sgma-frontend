@@ -222,6 +222,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setPasswordError("");
@@ -271,17 +272,13 @@ const Login = () => {
       return;
     }
     if(password !== confirmPassword){
-      setConfirmPasswordError('password doesn`t match with each other');
+      setConfirmPasswordError('password does not match with each other');
     }
-      setTimeout(() => {
-      setRegistrationSuccess(true);
-    }, 10);
-    navigate('/');
-
+    setRegistrationSuccess(true);
+    navigate('/')
   };
 
   const inputStyle = { border: "1px solid red" };
-
   return (
     <Container style={{ marginTop: "40vh" }}>
       <Row className="justify-content-center align-items-center">
@@ -340,10 +337,12 @@ const Login = () => {
                     </Form>
                   </Tab.Pane>
                   <Tab.Pane eventKey="register">
-                    {registrationSuccess ? (
+                   { registrationSuccess ? (
                     <Alert variant="success">
-                      Registration Successful! You can now log in.
-                    </Alert>) : (
+                      Registration Successful!
+                      
+                    </Alert>
+                  ) : (
                     <Form onSubmit={handleRegister}>
                     <Form.Group controlId="username">
                     <Form.Label>Username</Form.Label>
@@ -402,7 +401,7 @@ const Login = () => {
                         )}
                   </Form.Group>
                        <Button className="mt-3" variant="primary" type="submit">
-                        Resiter
+                        Register
                       </Button>
                     </Form> )}
                   </Tab.Pane>
