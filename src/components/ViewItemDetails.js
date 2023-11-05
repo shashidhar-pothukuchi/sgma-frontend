@@ -11,12 +11,20 @@ import {
 } from "react-bootstrap";
 //import { Inventory } from "../model/Inventory";
 
-function ViewItemDetails({ isOpen, onClose, details, updateInventory }) {
+function ViewItemDetails({
+  isOpen,
+  onClose,
+  details,
+  updateInventory,
+  getItemHistory,
+}) {
   //const { inventory, updateInventory } = Inventory();
   const [isChecked, setIsChecked] = useState(false);
   const [selectedRadio, setSelectedRadio] = useState("btnradio1");
   const [addQuantity, setaddQuantity] = useState("");
   const [edate, setedate] = useState(" ");
+  const [history, sethistory] = useState(getItemHistory());
+
   // const citem = inventory.find((item) => item.id === id);
 
   const handleCheckboxChange = (event) => {
@@ -66,15 +74,12 @@ function ViewItemDetails({ isOpen, onClose, details, updateInventory }) {
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>2023-10-01</td>
-                            <td>Added to inventory</td>
-                          </tr>
-                          <tr>
-                            <td>2023-09-25</td>
-                            <td>Updated quantity</td>
-                          </tr>
-                          {/* Add more rows as needed */}
+                          {getItemHistory().map((trans) => (
+                            <tr>
+                              <td>{trans.date}</td>
+                              <td>{trans.description}</td>
+                            </tr>
+                          ))}
                         </tbody>
                       </Table>
                     </Accordion.Body>

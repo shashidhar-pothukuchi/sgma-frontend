@@ -15,6 +15,7 @@ function Item({
   deleteItem,
   transactions,
   recordTransaction,
+  recentTransactions,
 }) {
   //const { inventory, updateInventory } = Inventory();
   const [isDetailsPopupOpen, setDetailsPopupOpen] = useState(false);
@@ -37,6 +38,22 @@ function Item({
     setDeletePopupOpen(false);
   };
 
+  const getItemHistory = () => {
+    return recentTransactions(details.id);
+  };
+
+  const updateDeleted = async (newValue) => {
+    const oldValue = details.quantity;
+    await updateInventory(details.id, details.quantity - newValue);
+    recordTransaction({
+      itemid: details.id,
+      quantity: oldValue,
+      updatedQuantity: oldValue - newValue,
+      date: "11-05-2023",
+      type: "Quantity",
+      description: "Deleted " + newValue,
+    });
+  };
   const updateNewAdded = async (newValue, edate, isDefault) => {
     if (isDefault) {
       const oldValue = details.defquantity;
@@ -45,6 +62,7 @@ function Item({
         itemid: details.id,
         quantity: oldValue,
         updatedQuantity: newValue,
+        date: "11-05-2023",
         type: "Default Quantity",
         description: "Updated Default Quantity: " + newValue,
       });
@@ -58,8 +76,9 @@ function Item({
         itemid: details.id,
         quantity: oldValue,
         updatedQuantity: oldValue + newValue,
+        date: "11-05-2023",
         type: "Quantity",
-        description: "Added: " + newValue,
+        description: "Added " + newValue,
       });
     }
   };
@@ -88,9 +107,10 @@ function Item({
                 alt={details.name}
               />
               <p className="pt-2">
-                {details.expired === false
-                  ? "Expires in " + details.expireIn + " days"
-                  : "Expired"}
+                {details.quantity > 0 &&
+                  (details.expired === false
+                    ? "Expires in " + details.expireIn + " days"
+                    : "Expired")}
               </p>
             </div>
             <div className="col-md-8">
@@ -117,7 +137,7 @@ function Item({
                     <button
                       type="button"
                       className="btn btn-outline-secondary rounded border-0"
-                      onClick={() => updateNewAdded(-1, null, false)}
+                      onClick={() => updateDeleted(1)}
                     >
                       <i className="fa fa-minus"></i>
                     </button>
@@ -153,6 +173,7 @@ function Item({
                       onClose={handleDetailsPopupClose}
                       details={details}
                       updateInventory={updateNewAdded}
+                      getItemHistory={getItemHistory}
                     />
                   )}
                   {/* </Modal> */}

@@ -8,8 +8,45 @@ export const Transaction = () => {
       itemid: 0,
       quantity: 0,
       updatedQuantity: 0,
+      date: "05-11-2023",
       type: "Quantity",
       description: "Added new Item",
+    },
+    {
+      id: 2,
+      itemid: 1,
+      quantity: 0,
+      updatedQuantity: 10,
+      date: "11-03-2023",
+      type: "Quantity",
+      description: "Added 10",
+    },
+    {
+      id: 3,
+      itemid: 1,
+      quantity: 0,
+      updatedQuantity: 10,
+      date: "11-03-2023",
+      type: "defQuantity",
+      description: "Updated purchase quantity",
+    },
+    {
+      id: 4,
+      itemid: 2,
+      quantity: 0,
+      updatedQuantity: 6,
+      date: "11-04-2023",
+      type: "Quantity",
+      description: "Added 6",
+    },
+    {
+      id: 5,
+      itemid: 2,
+      quantity: 0,
+      updatedQuantity: 10,
+      date: "11-04-2023",
+      type: "defQuantity",
+      description: "Updated purchase quantity",
     },
   ]);
 
@@ -28,17 +65,17 @@ export const Transaction = () => {
     setTransactions(updatedTransactions);
   };
 
-  const transactionsGroupedByType = _.groupBy(transactions, "type");
-
-  const mostRecent5TransactionsByType = _.mapValues(
-    transactionsGroupedByType,
-    (group) => _.takeRight(group, 5)
-  );
+  const recentTransactions = (itemid) => {
+    const transactionsGroupedById = transactions.filter(
+      (transaction) => transaction.itemid === itemid
+    );
+    return _.takeRight(transactionsGroupedById, 5);
+  };
 
   return {
     transactions,
     recordTransaction,
     deleteTransaction,
-    mostRecent5TransactionsByType,
+    recentTransactions,
   };
 };

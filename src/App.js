@@ -21,7 +21,7 @@ function App() {
     deleteItem,
   } = Inventory();
 
-  const { transactions, recordTransaction } = Transaction();
+  const { transactions, recordTransaction, recentTransactions } = Transaction();
   return (
     <Router>
       <div className="App">
@@ -48,6 +48,7 @@ function App() {
                           deleteItem={deleteItem}
                           transactions={transactions}
                           recordTransaction={recordTransaction}
+                          recentTransactions={recentTransactions}
                         />
                       ))}
                     </Row>
