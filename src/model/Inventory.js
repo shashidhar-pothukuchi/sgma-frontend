@@ -9,6 +9,8 @@ export const Inventory = () => {
       defquantity: 10,
       imgSrc: require("./../images/toamto.jpg"),
       expiryDate: "2023-11-10",
+      expired: false,
+      expireIn: 5,
     },
     {
       id: 2,
@@ -17,14 +19,8 @@ export const Inventory = () => {
       defquantity: 10,
       imgSrc: require("./../images/onion.jpeg"),
       expiryDate: "2023-11-15",
-    },
-    {
-      id: 3,
-      name: "Eggs",
-      quantity: 18,
-      defquantity: 10,
-      imgSrc: require("./../images/egg.png"),
-      expiryDate: "2023-11-11",
+      expired: false,
+      expireIn: 10,
     },
     {
       id: 4,
@@ -33,14 +29,8 @@ export const Inventory = () => {
       defquantity: 10,
       imgSrc: require("./../images/bread.jpeg"),
       expiryDate: "2023-11-01",
-    },
-    {
-      id: 5,
-      name: "Garlic",
-      quantity: 2,
-      defquantity: 10,
-      imgSrc: require("./../images/garlic.jpg"),
-      expiryDate: "2023-12-12",
+      expired: true,
+      expireIn: 0,
     },
     // Add more items as needed
   ]);

@@ -110,7 +110,9 @@ const SearchInput = ({ addNewItem }) => {
                       quantity: 0,
                       defquantity: 0,
                       imgSrc: mainItem.imgSrc,
-                      expiryDate: Date(),
+                      expiryDate: "2023-11-30",
+                      expired: false,
+                      expireIn: 25,
                     });
                   }}
                 >
