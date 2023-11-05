@@ -1,6 +1,7 @@
 // import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Login from "./components/Login";
 import Search from "./components/Search";
 import Item from "./components/Item";
 import Grocerylist from "./components/Grocerylist";
@@ -27,8 +28,9 @@ function App() {
       <div className="App">
         <Navbar />
         <Routes>
+          <Route path="/" element={<Login/>}/>
           <Route
-            path="/"
+            path="/Home"
             element={
               <>
                 <div className="container-fluid pt-3">
