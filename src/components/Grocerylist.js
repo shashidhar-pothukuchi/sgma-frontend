@@ -1,16 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Container, Row, Col, Image, ListGroup } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import "font-awesome/css/font-awesome.min.css";
 
 const Grocerylist = ({ items }) => {
+  const [clickedItems, setClickedItems] = useState([]);
+
+  const handleItemClick = (itemId) => {
+    if (!clickedItems.includes(itemId)) {
+      setClickedItems([...clickedItems, itemId]);
+    } else {
+      const updatedItems = clickedItems.filter((id) => id !== itemId);
+      setClickedItems(updatedItems);
+    }
+  };
+
   return (
     <Container className="list-table">
       <ListGroup>
         {items.map((item) => (
-          <ListGroup.Item as="button" action>
+          <ListGroup.Item
+            key={item.id}
+            as="button"
+            action
+            onClick={() => handleItemClick(item.id)}
+            style={
+              clickedItems.includes(item.id)
+                ? { color: "gray", textDecoration: "line-through" }
+                : {}
+            }
+          >
             <Container className="text-center">
               <Row>
                 <Col>
+                  {clickedItems.includes(item.id) && (
+                    <i
+                      className="fa fa-check"
+                      style={{ marginRight: "10px" }}
+                    ></i>
+                  )}
                   <Image src={item.imgSrc} height="50" width="50" fluid />
                 </Col>
                 <Col>Quantity to Buy</Col>
