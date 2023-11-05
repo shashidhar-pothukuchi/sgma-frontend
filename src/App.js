@@ -1,4 +1,4 @@
-// import React, { useState } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
@@ -13,6 +13,8 @@ import { Inventory } from "./model/Inventory";
 import { Transaction } from "./model/Transactions";
 
 function App() {
+  const [name, setname] = useState("");
+  const [isSet, setisSet] = useState(false);
   const {
     inventory,
     updateInventory,
@@ -22,13 +24,22 @@ function App() {
     deleteItem,
   } = Inventory();
 
+  const setuname = (name) => {
+    setname(name);
+    setisSet(true);
+  };
+
+  const setLogout = () => {
+    setname(" ");
+  };
+
   const { transactions, recordTransaction, recentTransactions } = Transaction();
   return (
     <Router>
       <div className="App">
-        <Navbar />
+        <Navbar username={name} isSet={isSet} setLogout={setLogout} />
         <Routes>
-          <Route path="/" element={<Login/>}/>
+          <Route path="/" element={<Login setuname={setuname} />} />
           <Route
             path="/Home"
             element={
