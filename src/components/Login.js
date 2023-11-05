@@ -28,14 +28,14 @@
 //     console.log('Email:', email);
 //     console.log('Password:', password);
 //     if(email !== 'johndoe@example.com' && password !== 'johndoe'){
-       
+
 //        setEmailError('Email is incorrect.');
 //        setPasswordError('Password is incorrect');
 //     }
 //     else if(email !== 'johndoe@example.com')
 //     {
 //       setEmailError('Email is incorrect.');
-      
+
 //     }
 //     else if(password !== 'johndoe'){
 //       setPasswordError('Password is incorrect');
@@ -87,7 +87,6 @@
 // };
 
 // export default Login;
-
 
 // import React, { useState } from 'react';
 // import { Form, Button, Container, Row, Col, Tab, Nav } from 'react-bootstrap';
@@ -206,32 +205,31 @@
 
 // export default Login;
 
-
-import React, { useState } from 'react';
-import { Form, Button, Container, Row, Col, Tab, Nav } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Form, Button, Container, Row, Col, Tab, Nav } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState(''); // State to manage email error message
-  const [passwordError, setPasswordError] = useState(''); // State to manage password error message
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState(""); // State to manage email error message
+  const [passwordError, setPasswordError] = useState(""); // State to manage password error message
 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Reset error messages
-    setEmailError('');
-    setPasswordError('');
+    setEmailError("");
+    setPasswordError("");
 
     // Check if email and password fields are empty
-    if (email === '') {
-      setEmailError('Email is required.');
+    if (email === "") {
+      setEmailError("Email is required.");
     }
 
-    if (password === '') {
-      setPasswordError('Password is required.');
+    if (password === "") {
+      setPasswordError("Password is required.");
     }
 
     // If there are errors, do not proceed with the login
@@ -243,23 +241,23 @@ const Login = () => {
     // For this example, we'll simply log the email and password.
 
     // Simulate a successful login, and navigate to a new route
-    console.log('Email: ' + email);
-    console.log('Password: ' + password);
+    console.log("Email: " + email);
+    console.log("Password: " + password);
 
     // Check your authentication logic here and display an error message for wrong credentials
-    if (email === 'user@example.com' && password === 'password') {
-      navigate('/dashboard'); // Navigate to the '/dashboard' route for successful login
+    if (email === "user@example.com" && password === "password") {
+      navigate("/dashboard"); // Navigate to the '/dashboard' route for successful login
     } else {
-      setEmailError('Email is incorrect.');
-      setPasswordError('Password is incorrect.');
+      setEmailError("Email is incorrect.");
+      setPasswordError("Password is incorrect.");
     }
   };
 
-  const inputStyle = { border: '1px solid red' };
+  const inputStyle = { border: "1px solid red" };
 
   return (
-    <Container>
-      <Row className="justify-content-center align-items-center min-vh-100">
+    <Container style={{ marginTop: "40vh" }}>
+      <Row className="justify-content-center align-items-center">
         <Col md={6}>
           <Tab.Container defaultActiveKey="login">
             <Row>
@@ -287,10 +285,15 @@ const Login = () => {
                           required // Make the field mandatory
                           style={emailError ? inputStyle : {}}
                         />
-                        {emailError && <p className="text-danger">{emailError}</p>}
+                        {emailError && (
+                          <p className="text-danger">{emailError}</p>
+                        )}
                       </Form.Group>
 
-                      <Form.Group controlId="formBasicPassword">
+                      <Form.Group
+                        className="mt-3"
+                        controlId="formBasicPassword"
+                      >
                         <Form.Label>Password</Form.Label>
                         <Form.Control
                           type="password"
@@ -300,10 +303,12 @@ const Login = () => {
                           required // Make the field mandatory
                           style={passwordError ? inputStyle : {}}
                         />
-                        {passwordError && <p className="text-danger">{passwordError}</p>}
+                        {passwordError && (
+                          <p className="text-danger">{passwordError}</p>
+                        )}
                       </Form.Group>
 
-                      <Button variant="primary" type="submit">
+                      <Button className="mt-3" variant="primary" type="submit">
                         Login
                       </Button>
                     </Form>
