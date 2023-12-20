@@ -14,3 +14,7 @@ To run this project, in the project directory, you can run:
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+# SGMA Backend
+
+Backend to this project can be found in [SGMA-Backend](https://github.com/shashidhar0302/SGMA-backend).
